@@ -153,6 +153,12 @@ class NullAttribute extends Command
         }
     }
 
+    /**
+     * Set attribute data null for attribute ID and table
+     * @param null $attributeId
+     * @param null $table
+     * @return int
+     */
     public function nullValue($attributeId = null, $table = null)
     {
         if (!$attributeId || !$table) {
@@ -182,6 +188,11 @@ class NullAttribute extends Command
         }
     }
 
+    /**
+     * Resolve table
+     * @param string $backendType
+     * @return bool|string
+     */
     public function resolveTable($backendType)
     {
         switch ($backendType) {
@@ -201,6 +212,11 @@ class NullAttribute extends Command
         }
     }
 
+    /**
+     * Fetch attribute data by code
+     * @param null $attributeCode
+     * @return array
+     */
     public function getEavAttribute($attributeCode = null)
     {
         $select = $this->connection
@@ -212,6 +228,10 @@ class NullAttribute extends Command
         return $this->connection->fetchRow($select);
     }
 
+    /**
+     * Get product attribute type ID from DB
+     * @return int
+     */
     public function getAttributeTypeId()
     {
         $select = $this->connection
