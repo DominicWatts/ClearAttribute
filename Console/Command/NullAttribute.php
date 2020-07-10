@@ -7,28 +7,24 @@ declare(strict_types=1);
 
 namespace Xigen\ClearAttribute\Console\Command;
 
-use Magento\Catalog\Model\Product\Type;
+use Magento\Catalog\Api\Data\ProductAttributeInterface;
+use Magento\Eav\Api\Data\AttributeInterface as EavAttributeInterface;
+use Magento\Framework\Api\AttributeInterface;
 use Magento\Framework\App\Area;
+use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\App\State;
 use Magento\Framework\Console\Cli;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\ProgressBarFactory;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\Api\AttributeInterface;
-use Magento\Eav\Api\Data\AttributeInterface as EavAttributeInterface;
-use Magento\Catalog\Api\Data\ProductAttributeInterface;
 
 class NullAttribute extends Command
 {
-
     const ATTRIBUTE_ARGUMENT = "attribute";
 
     /**
@@ -107,7 +103,7 @@ class NullAttribute extends Command
         $this->state->setAreaCode(Area::AREA_GLOBAL);
         $this->input = $input;
         $this->output = $output;
-        
+
         $attribute = $this->input->getArgument(self::ATTRIBUTE_ARGUMENT) ?: false;
 
         if ($attribute) {
@@ -126,7 +122,7 @@ class NullAttribute extends Command
             }
 
             $this->output->writeln('[' . $this->dateTime->gmtDate() . '] Start');
-            
+
             if ($eav = $this->getEavAttribute($attribute)) {
                 if ($table = $this->resolveTable($eav[EavAttributeInterface::BACKEND_TYPE])) {
                     $attributeId = $eav[EavAttributeInterface::ATTRIBUTE_ID];
@@ -145,7 +141,10 @@ class NullAttribute extends Command
                     }
                 }
             } else {
-                $this->output->writeln('[' . $this->dateTime->gmtDate() . '] <error>Cannot find attribute code</error>');
+                $this->output->writeln((string) __(
+                    "[%1] <error>Cannot find attribute code</error>",
+                    $this->dateTime->gmtDate()
+                ));
             }
 
             if ($this->input->isInteractive()) {
@@ -172,7 +171,6 @@ class NullAttribute extends Command
                 [EavAttributeInterface::ATTRIBUTE_ID . ' = ?' => $attributeId]
             );
             $this->connection->commit();
-        
         } catch (\Exception $e) {
             $this->logger->critical($e->getMessage());
             $this->output->writeln((string) __(
@@ -236,4 +234,3 @@ class NullAttribute extends Command
         parent::configure();
     }
 }
-
