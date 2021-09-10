@@ -95,6 +95,7 @@ class NullAttribute extends Command
      * {@inheritdoc}
      * xigen:clearattribute:null <attribute>
      * bin/magento xigen:clearattribute:null special_price
+     * @return int
      */
     protected function execute(
         InputInterface $input,
@@ -136,9 +137,7 @@ class NullAttribute extends Command
                     $this->nullValue($attributeId, $table);
                     $this->output->writeln('[' . $this->dateTime->gmtDate() . '] Finish');
 
-                    if ($this->input->isInteractive()) {
-                        return Cli::RETURN_SUCCESS;
-                    }
+                    return Cli::RETURN_SUCCESS;
                 }
             } else {
                 $this->output->writeln((string) __(
@@ -146,11 +145,14 @@ class NullAttribute extends Command
                     $this->dateTime->gmtDate()
                 ));
             }
-
-            if ($this->input->isInteractive()) {
-                return Cli::RETURN_FAILURE;
-            }
+        } else {
+            $this->output->writeln((string) __(
+                "[%1] <error>Please supply attribute code</error>",
+                $this->dateTime->gmtDate()
+            ));
         }
+
+        return Cli::RETURN_FAILURE;
     }
 
     /**

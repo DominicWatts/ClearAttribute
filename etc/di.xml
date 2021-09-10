@@ -3,7 +3,7 @@
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="NullAttribute" xsi:type="object">Xigen\ClearAttribute\Console\Command\NullAttribute</item>
+                <item name="Xigen_NullAttribute" xsi:type="object">Xigen\ClearAttribute\Console\Command\NullAttribute</item>
             </argument>
         </arguments>
     </type>
