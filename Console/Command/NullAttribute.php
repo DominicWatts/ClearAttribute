@@ -138,7 +138,6 @@ class NullAttribute extends Command
                     $this->output->writeln('[' . $this->dateTime->gmtDate() . '] Finish');
 
                     return Cli::RETURN_SUCCESS;
-                    
                 }
             } else {
                 $this->output->writeln((string) __(
