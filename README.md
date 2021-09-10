@@ -6,6 +6,8 @@
 
 ![PHPStan](https://github.com/DominicWatts/ClearAttribute/workflows/PHPStan/badge.svg)
 
+![php-cs-fixer](https://github.com/DominicWatts/ClearAttribute/workflows/php-cs-fixer/badge.svg)
+
 Shell script to null product attribute data from database using direct queries - quickly clear down database for specific product attributes
 
 # Install instructions #
