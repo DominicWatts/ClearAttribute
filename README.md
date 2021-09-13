@@ -1,4 +1,4 @@
-# ClearAttribute
+# Magento 2 Clear Attribute
 
 ![phpcs](https://github.com/DominicWatts/ClearAttribute/workflows/phpcs/badge.svg)
 

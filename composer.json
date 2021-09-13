@@ -1,6 +1,6 @@
 {
     "name": "dominicwatts/clearattribute",
-    "description": "Shell script to null product attribute data from database using direct queries - quickly clear down database",
+    "description": "Magento 2 Shell script to null product attribute data from database using direct queries - quickly clear down database",
     "type": "magento2-module",
     "license": "OSL-3.0",
     "version": "1.0.2",
